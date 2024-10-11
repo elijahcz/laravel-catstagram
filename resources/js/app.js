@@ -16,7 +16,8 @@ const dropzone = new Dropzone('#dropzone', {
             uploadedImage.name = document.querySelector('[name="imagen"]').value;
 
             this.options.addedfile.call(this, uploadedImage);
-            this.options.thumbnail.call(this, uploadedImage, "/uploads/${uploadedImage.name}");
+            this.options.thumbnail.call(this, uploadedImage, "/uploads/" + uploadedImage.name);
+            
             uploadedImage.previewElement.classList.add(
                 "dz-success",
                 "dz-complete"
@@ -31,5 +32,6 @@ dropzone.on('success', function(file, response) {
 });
 
 dropzone.on('removedfile', function(){
+    document.querySelector('[name="imagen"]').value = '';
     console.log("File has been removed");
 });
