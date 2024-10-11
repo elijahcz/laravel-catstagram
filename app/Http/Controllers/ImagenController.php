@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ImagenController extends Controller
 {
-    //
-
     public function store(Request $request) {
         
         $imagen = $request->file('file');
 
         $nombreImagen = Str::uuid() . "." . $imagen->extension();
 
-        $imagenServidor = Image::read($imagen);
-        $imagenServidor->scale(1000, 1000);
+        $imageManager = new ImageManager(new Driver());
+        $imagenServidor = $imageManager::imagick()->read($imagen);
+        $imagenServidor->cover(1000, 1000);
 
         $imagenPath = public_path('uploads') . "/" . $nombreImagen;
         $imagenServidor->save($imagenPath);
