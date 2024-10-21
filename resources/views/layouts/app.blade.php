@@ -27,7 +27,7 @@
                     <a class="font-bold text-gray-600 text-sm" href="{{ route('posts.index', auth()->user()->username) }}">
                         ¡ Hola <span class="font-normal">{{ auth()->user()->username }}</span> !
                     </a>
-                    <form method="POST" action="{{ route('logout')}}">
+                    <form method="POST" action="{{ route('logout')}}" novalidate>
                         @csrf
                         <button type="submit" class="font-bold uppercase text-gray-600 text-sm" href="{{ route('logout') }}">
                             Cerrar Sesión
@@ -38,12 +38,15 @@
 
                 @guest
                 <nav class="flex gap-2 items-center">
-                    <form action="{{ route('login') }}" method="POST">
+                    {{-- <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <button type="submit" class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login') }}">
                             Login
                         </button>
-                    </form>
+                    </form> --}}
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login') }}">
+                        Log In
+                    </a>
                     <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">
                         Crear Cuenta
                     </a>
